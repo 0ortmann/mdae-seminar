@@ -34,6 +34,56 @@
     \end{figure}
 \end{frame}
 
-
 \subsection{Online Problemstellung}
-\subsection{Simple Greedy}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    „Nach und nach Knoten und zugehörige Kanten aufdecken. Problemstellung (MST bzw. TSP) in jedem Zug auf Teilgraf möglichst gut bearbeiten.“
+    \vspace{1em}
+    \begin{itemize}
+        \itemsep\setlength{.8em}
+        \item $\sigma = v_0, v_1, ...$ wobei $v_t$: \emph{Vertex}
+        \item $\forall s \leq t-1: v_tv_s$ Kanten werden zusammen mit Knoten $t$ bekannt
+        \item Kantengewichte erfüllen Dreiecksungleichung ($\rightarrow$ metrisch)
+        \item Iteration $t$:
+        \begin{itemize}
+            \item Teilgraf $G_t = (V_t, E_t)$ 
+            \item $V_t = \{v_0,...,v_t\}$
+            \item $E_t = V_t \times V_t \rightarrow$ Graf ist „complete“
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Online Ziele}
+    \begin{block}{Online MST}
+        \vspace{1em}
+        \begin{itemize}
+            \itemsep\setlength{.8em}
+            \item Kanten Teilmenge $T_t$
+            \item $T_t$ ist MST zu $G_t$
+        \end{itemize}
+    \end{block}
+    \vspace{1em}
+    \begin{block}{Online TSP}
+        \vspace{1em}
+        \begin{itemize}
+            \itemsep\setlength{.8em}
+            \item Tour durch $G_t$: $Q_t$
+            \item $Q_t$ ist TSP Tour auf $G_t$ ($\approx$ minimiert traveling Kosten)
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%FIXME: definitionen von OPT und competitive ratio
+
+\subsection{Einfacher Greedy Algorithmus}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \begin{block}{Idee}
+        „Bei neuem Knoten $v_t$ finde die Kante mit dem kleinsten Gewicht, die $v_t$ mit dem bisherigen Teilgrafen verbindet. Füge diese Kante zum MST hinzu.\\
+        Nun iteriere, bis Stagnation: nimm eine kostengünstige Kante und tausche gegen eine teure Kante im MST.“
+    \end{block}
+\end{frame}
+
