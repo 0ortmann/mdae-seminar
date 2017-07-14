@@ -1,0 +1,75 @@
+Introduction
+	related work
+		- ggf als ausblick warum das paper cool ist und gut mit anderen integriert
+Problem Definitions
+	- def opt, ratio, alg, tree, notations
+An online approximation scheme with constant armortized budget
+
+The non-armortized scenario
+Applications to TSP
+	Critical example and intuition for solution method
+	Robust TSP tours
+
+
+
+
+wie viele agls im paper?
+wie viele beweise?
+theoreme?
+lemmata?
+
+kernaussage des papers, titel wieder aufgreifen. ohne recourse (budget) wäre das hier alles viel schlechter (wie schlecht, cr, was bringt das paper dazu)
+
+redezeit == 35-40mins, 10mins diskussion
+
+---
+generell mst & tsp problembeschreibung
+online problemstellung, was wird pro zug dazugetan, was soll pro zug erreicht werden
+
+"bisherige" (greedy) strategie
+herausstellen, dass das ohne recourse ist.
+was ist damit erreicht, competitive ratio
+
+was bringt dieses paper dazu:
+	- recourse: definition  (das muss klar sein)
+	- verbesserung der cr mit der einschränkung von "budget" and edges die maximal dazu genommen / geändert werden dürfen
+	- im armotisierten fall
+		- theoreme erklären, algorithmen erklären (vorallem zb bei sequence die beiden freezes)
+			- was bringen die beiden freezes in der condition?
+		- beweis skizze (mit was machen sie den beweis zb. potentialfkt oä)
+	- im allgemeinen fall
+
+
+gliederungsentwurf:
+
+---
+problem-definitions.tex:
+
+	mst + tsp (grafiken)
+	online problemstellung, definition von req.seq, OPT, erwartung und ziel des algorithmus
+
+	ALGORITHM SIMPLE GREEDY:
+		pseudocode
+		competitive ratio
+
+
+---
+recourse.tex:
+	definition von recourse + budget
+
+	kurz: related work, unsolved question "wird es mit einem budget besser? wenn ja, mit welchem budget und wie viel wird es besser? >> 1+€, 1/€ log 1/€"
+
+	idee: einschränkung via budget, so viele edges maximal dazu. 
+
+---
+sequence freeze.tex:
+	theorem 1 + 2 kurz
+	dann die freezes, hier etwas zeit rein!
+	-> wieder GREEDY zitieren, änderungen verdeutlichen
+	beweis (höchstens) nur andeuten, wichtig ist algo idee
+
+
+
+...
+
+ff ctnd
