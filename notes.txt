@@ -38,6 +38,10 @@ was bringt dieses paper dazu:
 			- was bringen die beiden freezes in der condition?
 		- beweis skizze (mit was machen sie den beweis zb. potentialfkt oä)
 	- im allgemeinen fall
+	- anwendung auf TSP
+		- idee darstellen, problem überführung (reduktion?)
+		- nur noch vorgehen und intuitionen erläutern, keine zeit dafür in 40mins.
+ 
 
 
 gliederungsentwurf:
@@ -67,6 +71,8 @@ sequence freeze.tex:
 	dann die freezes, hier etwas zeit rein!
 	-> wieder GREEDY zitieren, änderungen verdeutlichen
 	beweis (höchstens) nur andeuten, wichtig ist algo idee
+
+
 
 
 

@@ -1,10 +1,72 @@
 \section{Sequence Freeze}
 
+\subsection{Zielsetzung}
 \begin{frame}
     \frametitle{\insertsection}
-    Freezing Rules -- vermeide unnötige Swaps
+    \underline{Ziel: Online Algorithmus für MST}
+    \vspace{1em}
+    \begin{itemize}
+        \itemsep\setlength{.8em}
+        \item $(1+\epsilon)$-competitive
+        \item Armortisiertes Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+    \end{itemize}
+    \vspace{1em}
+
+    \underline{Abschluss:}\\
+    \vspace{1em}
+    Präsentierter Algorithmus liefert best mögliches Ergebnis (logarithmisch gemessen)
 \end{frame}
 
+\begin{frame}
+    \frametitle{\insertsection}
+    \begin{theorem}
+        \vspace{1em}
+        Jeder $(1+\epsilon)$-competitive Algorithmus für das online MST Problem benötigt ein armortisiertes recourse Budget von $\Omega(\frac{1}{\epsilon})$
+        \vspace{1em}
+    \end{theorem}
+    \vspace{1em}
+    \begin{theorem}
+        \vspace{1em}
+        Es existiert ein $(1+\epsilon)$-competitiver Algorithmus für das online MST Problem mit einem armortisierten recourse Budget von $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+        \vspace{1em}
+    \end{theorem}
+    Beweise siehe \cite{recourse2016}
+\end{frame}
 
-\subsection{Ein Lower Bound}
-\subsection{Freezes vor Swaps}
+\subsection{Freezing Rules}
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \underline{Finde Balance zwischen Anzahl Swaps $(\leq k)$ und Nutzen}\\
+    \vspace{1em}
+    \begin{block}{Rule 1}
+        Verhindert das Swappen von Kanten, die zu einem Subgrafen gehören, der an den Gesamtkosten des MST keinen großen Einfluss hat. -- „Kein Swap wenn indirekter Nutzen zu gering. Andere Teilgrafen sind viel einflussreicher”.
+    \end{block}
+    \vspace{1em}
+    \begin{block}{Rule 2}
+        Verhindert das Entfernen von Kanten mit geringen Kosten. -- „Kein Swap, wenn direkter Nutzen zu gering”.
+    \end{block}
+\end{frame}
+
+\subsection{Algorithm Sequence Freeze}
+\begin{frame}
+    \frametitle{\insertsection}
+    \underline{Wie simple Greedy Algorithmus mit Einschränkungen}\\
+    \vspace{1em}
+    Iteration $t$: $T_t = T_{t-1} \cup \{$„günstigste neue Kante”$\}$\\
+    \vspace{1em}
+    Betrachte Kanten $(f, h) \in (E_t \setminus T_t) \times T_t$\\
+    Swap wenn nur, wenn..:
+    \vspace{1em}
+    \begin{itemize}
+        \itemsep\setlength{1em}
+        \item $(T_t \cup \{f\}) \setminus \{h\}$ bleibt ein Tree
+        \item $c(h) > (1+\epsilon) \cdot c(f)$
+        \item \emph{Rule 1} hält
+        \item \emph{Rule 2} hält
+    \end{itemize}
+\end{frame}
+
+% TODO: backup slide bauen mit den exakten formeln pro Rule.
+
+%\subsection{Ein Lower Bound}
+%\subsection{Freezes vor Swaps}
