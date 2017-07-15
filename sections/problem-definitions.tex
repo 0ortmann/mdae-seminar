@@ -46,7 +46,9 @@
         \item $\forall s \leq t-1: v_tv_s$ Kanten werden zusammen mit Knoten $t$ bekannt
         \item Kantengewichte erfüllen Dreiecksungleichung ($\rightarrow$ metrisch)
         \item Iteration $t$:
+        \vspace{.4em}
         \begin{itemize}
+            \itemsep\setlength{.4em}
             \item Teilgraf $G_t = (V_t, E_t)$ 
             \item $V_t = \{v_0,...,v_t\}$
             \item $E_t = V_t \times V_t \rightarrow$ Graf ist „complete“
@@ -63,6 +65,7 @@
             \item Kanten Teilmenge $T_t$
             \item $T_t$ ist MST zu $G_t$
         \end{itemize}
+        \vspace{.5em}
     \end{block}
     \vspace{1em}
     \begin{block}{Online TSP}
@@ -72,18 +75,70 @@
             \item Tour durch $G_t$: $Q_t$
             \item $Q_t$ ist TSP Tour auf $G_t$ ($\approx$ minimiert traveling Kosten)
         \end{itemize}
+        \vspace{.5em}
     \end{block}
 \end{frame}
 
 %FIXME: definitionen von OPT und competitive ratio
 
-\subsection{Einfacher Greedy Algorithmus}
+\subsection{Einfacher Greedy Algorithmus -- online MST}
 
 \begin{frame}
     \frametitle{\insertsubsection}
-    \begin{block}{Idee}
-        „Bei neuem Knoten $v_t$ finde die Kante mit dem kleinsten Gewicht, die $v_t$ mit dem bisherigen Teilgrafen verbindet. Füge diese Kante zum MST hinzu.\\
-        Nun iteriere, bis Stagnation: nimm eine kostengünstige Kante und tausche gegen eine teure Kante im MST.“
+    %\begin{block}{Idee}
+        %„Bei neuem Knoten $v_t$ finde die Kante mit dem kleinsten Gewicht, die $v_t$ mit dem bisherigen %Teilgrafen verbindet. Füge diese Kante zum MST hinzu.\\
+        %Nun iteriere, bis Stagnation: nimm eine kostengünstige Kante und tausche gegen eine teure Kante im %MST.“
+    %\end{block}
+    \underline{Vorheriger Iteration: \qquad $T_{t-1}$}\\
+    \vspace{1em}
+    Iteration $t$:
+    \begin{itemize}
+        \itemsep\setlength{.8em}
+        \item Decke neuen Knoten auf: $v_t$
+        \item Kürzeste Verbindungskante $g_t$ zwischen $v_t$ und $T_{t-1}$
+        \item $T_t = T_{t-1} \cup g_t$
+        \vspace{1em}
+        \item Kostenreduktion von $T_t$ -- \textit{„Swaps”}:
+        \vspace{.8em}
+        \begin{itemize}
+        \itemsep\setlength{.8em}
+            \item Füge günstige Kante hinzu ($\rightarrow$ Kreis entsteht in Teilbaum)
+            \item Entferne teuerste Kante aus Kreis
+            \item Wiederhole ...
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Budget}
+
+\begin{frame}
+    \frametitle{Swaps und Recourse}
+    \begin{itemize}
+        \itemsep\setlength{1em}
+        \item Swaps $\rightsquigarrow$ optimale Lösung
+        \item Wie viele swaps...?
+    \end{itemize}
+    \vspace{1em}
+    \begin{block}{Recourse}
+        \vspace{1em}
+        \emph{Recourse} bzw. \emph{recourse Budget} -- Menge von Kanten, die pro Iteration maximal zur Lösung hinzugefügt werden.
+        \vspace{1em}
     \end{block}
 \end{frame}
 
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \underline{Iteration $t$, Budget $k$}\\
+    \vspace{1em}
+    \begin{block}{Striktes Budget}
+        \vspace{1em}
+        $\forall t \geq 1:\hspace{0.5em}|T_t \setminus T_{t-1}| \leq k$
+        \vspace{1em}
+    \end{block}
+    \vspace{1em}
+    \begin{block}{Armotisiertes Budget}
+        \vspace{1em}
+        $ \sum_{s=1}^{t}\hspace{0.5em}|T_s \setminus T_{s-1}| \quad \leq k \cdot t$
+        \vspace{1em}
+    \end{block}
+\end{frame}
