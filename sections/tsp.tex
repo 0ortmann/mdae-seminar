@@ -1,9 +1,66 @@
 \section{Anwendung auf TSP}
 
-\subsection{Von MST zu TSP}
-% eulerian walk
-% shortcutting
+\subsection{Shortcutting (Beispiel)}
 
-% ähnliche bäume, trotzdem unterschiedliche touren!
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \begin{block}{Eulerian Walk}
+        \vspace{0.5em}
+        \begin{itemize}
+            \itemsep\setlength{0.7em}
+            \item Besuche jede \emph{Kante} genau einmal
+            \item Sei $2 \cdot T$ Multigraf zu T -- jede Kante verdoppelt\\$\implies$Jeder Knoten hat geraden Grad \\$\implies$Eulerian Walk möglich
+        \end{itemize}
+    \vspace{.8em}
+    \end{block}
+    \begin{itemize}
+        \itemsep\setlength{0.7em}
+        \item Bilde Eulerian Walk
+        \item Notiere \emph{Knoten}reihenfolge
+        \item Streiche alle mehrfach Vorkommnisse (\emph{Shortcut})\\$\implies$ Traveling Salesman Tour
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{./img/shortcutting.pdf}
+        \caption{Tree (schwarz), Shortcut Tour (gestrichelt) \cite{recourse2016}}
+    \end{figure}
+    $W = u, v_1, w_1, \bar{v_1}, v_2, w_2, \bar{v_2}, v_3, w_3, \bar{v_3}, v_4, w_4, \bar{v_4}, \bar{\bar{v_3}}, \bar{\bar{v_2}}, \bar{\bar{v_1}}, \bar{u}$\\
+    Tour $= u, v_1, w_1, v_2, w_2 ,v_3, w_3, v_4, w_4, (\bar{u})$
+\end{frame}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \begin{itemize}
+        \itemsep\setlength{0.7em}
+        \item Spanning Trees $R, R'$
+        \item Unterschied nur 1 Kante: $R' = (R \cup \{f\}) \setminus \{g\}, f \notin R \wedge g \in R$\\$\implies$ „ein Swap Unterschied”
+        \vspace{1em}
+        \item Sehr ähnliche Bäume führen zu ggf. sehr unterschiedlichen TSP Touren
+        \item Tour zu $R'$ (rechts): hat nie Knotenfolgen der Form $(w_i, v_{i+1})$\\$\implies$Bei steigender Knotenanzahl zunehmend großer Unterschied in Tour
+    \end{itemize}
+\end{frame}
 
 \subsection{Robuste TSP Touren}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \begin{theorem}[MST zu TSP]
+        \vspace{.8em}
+        Gegeben eine Reihe von metrischen Grafen $G_0, ..., G_t,..$ mit $G_t = (V_t, E_t) \wedge V_t = \{v_0, ...,v_t\}$. $T_t$ is Spanning Tree zu $G_t$ in Iteration $t$.\\
+        \vspace{1em}
+        Es existiert ein online Algorithmus, der zu jedem Teilgraf eine TSP Tour ausgibt ($Q_0, ..., Q_t, ...$), sodass
+        \vspace{.7em}
+        \begin{itemize}
+            \itemsep\setlength{0.7em}
+            \item $c(Q_t) \leq 2 \cdot c(T_t)$
+            \item $|Q_t \setminus Q_{t-1}| \leq 4 \cdot |T_t \setminus T_{t-1}|$
+        \end{itemize}
+        \vspace{.8em}
+    \end{theorem}
+    \vspace{1em}
+    \underline{Beweis benötigt verbessertes Shortcutting}
+\end{frame}
