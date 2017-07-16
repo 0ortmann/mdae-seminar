@@ -9,7 +9,7 @@
         \begin{itemize}
             \itemsep\setlength{0.7em}
             \item Besuche jede \emph{Kante} genau einmal
-            \item Sei $2 \cdot T$ Multigraf zu T -- jede Kante verdoppelt\\$\implies$Jeder Knoten hat geraden Grad \\$\implies$Eulerian Walk möglich
+            \item Sei $(2 \cdot T)$ Multigraf zu T -- jede Kante verdoppelt\\$\implies$Jeder Knoten hat geraden Grad \\$\implies$Eulerian Walk möglich
         \end{itemize}
     \vspace{.8em}
     \end{block}
@@ -32,12 +32,13 @@
     Tour $= u, v_1, w_1, v_2, w_2 ,v_3, w_3, v_4, w_4, (\bar{u})$
 \end{frame}
 
+\subsection{Motivation: Unvorhersehbare Touren}
 \begin{frame}
     \frametitle{\insertsubsection}
     \begin{itemize}
-        \itemsep\setlength{0.7em}
+        \itemsep\setlength{0.8em}
         \item Spanning Trees $R, R'$
-        \item Unterschied nur 1 Kante: $R' = (R \cup \{f\}) \setminus \{g\}, f \notin R \wedge g \in R$\\$\implies$ „ein Swap Unterschied”
+        \item $R' = (R \cup \{f\}) \setminus \{g\}, f \notin R \wedge g \in R$\\$\implies$ „ein Swap Unterschied”
         \vspace{1em}
         \item Sehr ähnliche Bäume führen zu ggf. sehr unterschiedlichen TSP Touren
         \item Tour zu $R'$ (rechts): hat nie Knotenfolgen der Form $(w_i, v_{i+1})$\\$\implies$Bei steigender Knotenanzahl zunehmend großer Unterschied in Tour
@@ -55,6 +56,7 @@
         Es existiert ein online Algorithmus, der zu jedem Teilgraf eine TSP Tour ausgibt ($Q_0, ..., Q_t, ...$), sodass
         \vspace{.7em}
         \begin{itemize}
+            \label{thm3}
             \itemsep\setlength{0.7em}
             \item $c(Q_t) \leq 2 \cdot c(T_t)$
             \item $|Q_t \setminus Q_{t-1}| \leq 4 \cdot |T_t \setminus T_{t-1}|$
@@ -63,4 +65,40 @@
     \end{theorem}
     \vspace{1em}
     \underline{Beweis benötigt verbessertes Shortcutting}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{\insertsubsection}
+    \underline{Idee: „Unterschiede zwischen Iterationen $(t-1)$ und $t$ messbar machen“}\\
+    \vspace{0.8em}
+    Momentan ist bereits messbar, wie zwei Spanning Trees ($R, R'$) sich nach einem Swap unterscheiden ($\rightarrow$ eine Kante)\\
+    \vspace{0.8em}
+    \begin{block}{Vorraussetzungen für Beweis von Theorem \ref{thm3}}
+        \vspace{0.8em}
+        \begin{itemize}
+            \itemsep\setlength{.8em}
+            \item Deterministische Prozedur um eine TSP Tour $Q$ von einem Eulerian Walk $W$ und einem Spanning Tree $R$ zu erzeugen $\rightarrow$ Robustes \emph{Shortcutting}
+            \item Deterministische Prozedur um aus zwei Spanning Trees ($R, R'$), die sich in einer Kante unterscheiden, sowie einem Eulerian Walk $W$ auf $(2\cdot R)$ einen Eulerian Walk $W'$ auf $(2\cdot R')$ zu erzeugen 
+        \end{itemize}
+        \vspace{0.8em}
+    \end{block}
+\end{frame}
+
+\subsection{Algorithmus: Robust Tour Shortcut}
+\begin{frame}
+    \frametitle{\insertsubsection}
+    
+\end{frame}
+
+\subsection{Algorithmus: Robust Walk Update}
+\begin{frame}
+    \frametitle{\insertsubsection}
+    
+\end{frame}
+
+\subsection{Competitive Analysis}
+\begin{frame}
+    \frametitle{\insertsubsection}
+    
 \end{frame}

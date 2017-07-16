@@ -21,9 +21,9 @@
 
 \begin{frame}
     \frametitle{\insertsection}
-    \begin{theorem}
+    \begin{theorem}[Untere Schranke]
         \label{thm1}
-        \vspace{1em}
+        \vspace{.5em}
         Jeder $(1+\epsilon)$-competitive Algorithmus für das online MST Problem benötigt ein armortisiertes recourse Budget von $\Omega(\frac{1}{\epsilon})$
         \vspace{1em}
     \end{theorem}
@@ -31,9 +31,9 @@
     Beweis siehe \cite{recourse2016}
     \vspace{1em}
 
-    \begin{theorem}
+    \begin{theorem}[Obere Schranke]
         \label{thm2}
-        \vspace{1em}
+        \vspace{.5em}
         Es existiert ein $(1+\epsilon)$-competitiver Algorithmus für das online MST Problem mit einem armortisierten recourse Budget von $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
         \vspace{1em}
     \end{theorem}
@@ -53,6 +53,11 @@
     \end{block}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Rule 1 und 2 Formal}
+    FIXME: hier mit allen nötigen (so schmal wie möglich die beiden Rules formal definieren)
+\end{frame}
+
 \subsection{Algorithm Sequence Freeze}
 \begin{frame}
     \frametitle{\insertsubsection}
@@ -70,8 +75,8 @@
     \begin{enumerate}
         \itemsep\setlength{1em}
         \item $c(h) > (1+\epsilon) \cdot c(f)$
-        \item \emph{Rule 1} hält
-        \item \emph{Rule 2} hält
+        \item FIXME: hier formal (\emph{Rule 1} hält)
+        \item FIXME: hier formal (\emph{Rule 2} hält)
     \end{enumerate}
 \end{frame}
 
@@ -105,7 +110,7 @@
     \begin{block}{Bound auf Swap Kosten}
         \vspace{1em}
         \emph{Cond. 3} -- Nur Swap wenn entfernte Kante Threshold übersteigt \\
-        \emph{FIXME}
+        \emph{FIXME FORMAL}
         \vspace{1em}
     \end{block}
 \end{frame}
@@ -123,5 +128,5 @@
         \item \underline{Armortisiertes} Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
     \end{itemize}
     \vspace{1em}
-    Da jeder online Algorithmus für MST mit obigen Eigenschaften mindestens ein Budget von $\Omega(\frac{1}{\epsilon})$ benötigt, liefert \emph{Sequence Freeze} das (logarithmisch) bestmögliche online Ergebnis.
+    Da jeder online Algorithmus für MST mit obigen Eigenschaften mindestens ein Budget von $\Omega(\frac{1}{\epsilon})$ benötigt (vgl. Theorem~\ref{thm1}), liefert \emph{Sequence Freeze} das (logarithmisch) bestmögliche online Ergebnis.
 \end{frame}
