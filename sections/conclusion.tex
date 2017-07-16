@@ -2,5 +2,19 @@
 
 \begin{frame}
 	\frametitle{\insertsection}
-	
+	\begin{itemize}
+		\itemsep\setlength{1em}
+		\item Standard online MST: Beste bekannte competitive Ratio $\Theta{\log n}$
+		\item Neu Erkenntnis mit \cite{recourse2016}:\\Recourse verbessert die competitive Ratio zu \underline{$(1+\epsilon)$} (amortisiert)
+		\item Verändertes Shortcutting Verfahren
+		\item Online MST $\xrightarrow{\text{det. Verfahren}}$ online TSP\\
+		Bewiesene Upper Bounds:
+		\vspace{1em}
+		\begin{itemize}
+			\itemsep\setlength{.7em}
+			\item Erhöht competitive Ratio um 2
+			\item Erhöht Budget um 4
+		\end{itemize}
+		\item Online TSP $(2+\epsilon)$-competitive mit armortisiertem Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+	\end{itemize}
 \end{frame}
