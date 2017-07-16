@@ -1,0 +1,20 @@
+\section{Online MST mit striktem Budget}
+
+\begin{frame}
+    \frametitle{\insertsection}
+    Kann ein striktes Budget besser sein? Insbesondere besser als $2$-competitive?
+    \begin{block}{Gegenbeispiel}
+        \begin{itemize}
+        \item Vollst. Graph, Knoten $v_0,...,v_n$
+        \item $\forall t < n: c(v_t, v_n) = 1$
+        \item $\forall s, t < n: c(v_s, v_t) = 2$
+        \end{itemize}
+        $\implies$ MST ist ein Stern um den letzten Knoten $n$\\
+        \vspace{1em}
+        Alle Iterationen $t < n$: $T_t$ enthält nur Kanten mit Kosten 2\\
+        \vspace{1em}
+        Bei fixem Budget $k$: $T_n$ enthält exakt $n-k$ Kanten der Kosten 2\\
+        \vspace{1em}
+        $\implies$ Competitive Ratio $2 - k/n \qquad (> 2 - \epsilon)$ bei großen $n$
+    \end{block}
+\end{frame}
