@@ -1,4 +1,4 @@
-\section{Online MST mit armortisiertem Budget}
+\section{Online MST mit amortisiertem Budget}
 
 \subsection{Zielsetzung}
 \begin{frame}
@@ -10,7 +10,7 @@
     \begin{itemize}
         \itemsep\setlength{.8em}
         \item $(1+\epsilon)$-competitive
-        \item Armortisiertes Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+        \item Amortisiertes Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
     \end{itemize}
     \vspace{1em}
 
@@ -24,7 +24,7 @@
     \begin{theorem}[Lower Bound]
         \label{thm1}
         \vspace{.5em}
-        Jeder $(1+\epsilon)$-competitive Algorithmus für das online MST Problem benötigt ein armortisiertes recourse Budget von $\Omega(\frac{1}{\epsilon})$
+        Jeder $(1+\epsilon)$-competitive Algorithmus für das online MST Problem benötigt ein amortisiertes recourse Budget von $\Omega(\frac{1}{\epsilon})$
         \vspace{1em}
     \end{theorem}
     Beweis siehe \cite{recourse2016}
@@ -33,7 +33,7 @@
     \begin{theorem}[Upper Bound]
         \label{thm2}
         \vspace{.5em}
-        Es existiert ein $(1+\epsilon)$-competitiver Algorithmus für das online MST Problem mit einem armortisierten recourse Budget von $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+        Es existiert ein $(1+\epsilon)$-competitiver Algorithmus für das online MST Problem mit einem amortisierten recourse Budget von $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
         \vspace{1em}
     \end{theorem}
 \end{frame}
@@ -134,7 +134,7 @@
 
 \begin{frame}
     \frametitle{\insertsubsection}
-    Armotisierter Upper Bound für Budget
+    Amortisierter Upper Bound für Budget
     \vspace{.5em}
     \begin{itemize}
         \itemsep\setlength{.5em}
@@ -165,7 +165,7 @@
     \begin{itemize}
         \itemsep\setlength{.8em}
         \item $(1+\epsilon)$-competitive
-        \item \underline{Armortisiertes} Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+        \item \underline{Amortisiertes} Budget $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
     \end{itemize}
     \vspace{1em}
     Da jeder online Algorithmus für MST mit obigen Eigenschaften mindestens ein Budget von $\Omega(\frac{1}{\epsilon})$ benötigt (vgl. Theorem~\ref{thm1}), liefert \emph{Sequence Freeze} das (logarithmisch) bestmögliche online Ergebnis.
