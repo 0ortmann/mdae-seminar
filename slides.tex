@@ -13,11 +13,11 @@
 \usecolortheme{crane}
 
 % Vor jedem neuen Abschnitt (\section) eine Folie mit Gliederung für diesen Abschnitt zeigen
-%\AtBeginSection[]{
-    %\ifnumcomp{\value{section}}{=}{1}{}{
-        %\frame{\frametitle{\insertsection}\tableofcontents[currentsection,hideothersubsections]}
-    %}
-%}
+\AtBeginSection[]{
+    \ifnumcomp{\value{section}}{=}{1}{}{
+        \frame{\frametitle{\insertsection}\tableofcontents[sectionstyle=show/hide,subsectionstyle=show/show/hide]}
+    }
+}
 
 \include{sections/meta}
 \setbeamertemplate{theorems}[numbered]
