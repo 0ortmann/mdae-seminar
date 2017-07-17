@@ -92,6 +92,8 @@
     \frametitle{\insertsubsection}
     \underline{Wie simple Greedy Algorithmus mit Einschränkungen}\\
     \vspace{1em}
+    $T_0 = \emptyset$\\
+    \vspace{1em}
     Iteration $t$: $T_t = T_{t-1} \cup \{$„günstigste neue Kante”$\}$\\
     \vspace{1em}
     Betrachte Kanten $(f, h) \in (E_t \setminus T_t) \times T_t$\\
@@ -109,9 +111,9 @@
     \end{enumerate}
 \end{frame}
 
-\subsection{Competitive Analysis (Skizze)}
+\subsection{Competitive Analysis}
 \begin{frame}
-    \frametitle{\insertsubsection}
+    \frametitle{\insertsubsection~(Skizze)}
     Competitiveness des Algoithmus im Vergleich zu OPT\\
     \vspace{.5em}
     \begin{block}{$(1+\epsilon)$-competitive}
@@ -133,7 +135,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{\insertsubsection}
+    \frametitle{\insertsubsection~(Skizze)}
     Amortisierter Upper Bound für Budget
     \vspace{.5em}
     \begin{itemize}
@@ -155,7 +157,7 @@
     \end{block}
 \end{frame}
 
-\subsection{Recap}
+\subsection{Rückblick}
 \begin{frame}
     \frametitle{\insertsection}
     \underline{Ergebnis}\\

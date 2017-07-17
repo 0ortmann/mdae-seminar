@@ -58,8 +58,8 @@
         \begin{itemize}
             \label{thm3}
             \itemsep\setlength{0.7em}
-            \item $c(Q_t) \leq 2 \cdot c(T_t)$
-            \item $|Q_t \setminus Q_{t-1}| \leq 4 \cdot |T_t \setminus T_{t-1}|$
+            \item $c(Q_t) \qquad \;\; \leq \quad 2 \cdot c(T_t)$
+            \item $|Q_t \setminus Q_{t-1}| \; \leq \quad 4 \cdot |T_t \setminus T_{t-1}|$
         \end{itemize}
         \vspace{.8em}
     \end{theorem}
@@ -72,7 +72,8 @@
     \frametitle{\insertsubsection}
     \underline{Idee: „Unterschiede zwischen Iterationen $(t-1)$ und $t$ messbar machen“}\\
     \vspace{0.8em}
-    Momentan ist bereits messbar, wie zwei Spanning Trees ($R, R'$) sich nach einem Swap unterscheiden ($\rightarrow$ eine Kante)\\
+    Momentan ist bereits messbar, wie zwei Spanning Trees $(R, R')$ sich nach einem Swap unterscheiden ($\rightarrow$ eine Kante)\\
+    (mehrere Swaps deterministisch)\\
     \vspace{0.8em}
     \begin{block}{Vorraussetzungen für Beweis von Theorem \ref{thm3}}
         \vspace{0.8em}
@@ -81,24 +82,113 @@
             \item Deterministische Prozedur um eine TSP Tour $Q$ von einem Eulerian Walk $W$ und einem Spanning Tree $R$ zu erzeugen $\rightarrow$ Robustes \emph{Shortcutting}
             \item Deterministische Prozedur um aus zwei Spanning Trees ($R, R'$), die sich in einer Kante unterscheiden, sowie einem Eulerian Walk $W$ auf $(2\cdot R)$ einen Eulerian Walk $W'$ auf $(2\cdot R')$ zu erzeugen 
         \end{itemize}
-        \vspace{0.8em}
+        \vspace{0.1em}
     \end{block}
 \end{frame}
 
 \subsection{Algorithmus: Robust Tour Shortcut}
 \begin{frame}
     \frametitle{\insertsubsection}
-    
+    \underline{Input:}\\
+    \vspace{.8em}
+    Baum $R$, Eurlerian Walk $W = x_1, ..., x_r$ auf $2\cdot R$, Funktion $I: \{x_1,...,x_r\} \rightarrow \{0, 1\}$ (Selektionsfunktion um Nodes nur einmal zu besuchen (vgl. $2\cdot R$))
+    \vspace{1em}
+    \begin{itemize}
+        \itemsep\setlength{.8em}
+        \item Erzeuge Walk der Form: $x_{\ell_1}, x_{\ell_2},..., x_{\ell_{|V|}}$, sodass $\forall i<j: {\ell_i} < {\ell_j} \wedge \forall i: I(x_{\ell_i}) = 1$
+        \item Rückgabe: $Q := \{x_{\ell_1},..., x_{\ell_{|V}|},x_{\ell_1}\}$
+    \end{itemize}
+    \vspace{.8em}
+    \underline{Beobachtung:}\\
+    \vspace{.8em}
+    Die zurückgegebene Tour $Q$ hat höchstens Kosten von $2\cdot c(R)$ (unabhängig von $I$)
 \end{frame}
 
 \subsection{Algorithmus: Robust Walk Update}
+
+\begin{frame}
+    \frametitle{\insertsubsection~(Beispiel)}
+    \underline{Ziel:}\\
+    \vspace{.7em}
+    Update $W \rightarrow W'$ bei Update von Baum $R \rightarrow R'$
+    \vspace{.7em}
+    \begin{itemize}
+        \itemsep\setlength{.7em}
+        \item $R' = (R \cup \{f\}) \setminus \{g\}$ wobei $f = st \wedge g =vw$
+        \item $R \setminus \{g\} \quad \implies$ 2 verbundene Komponenten $(C_1, C_2)$
+        \item o.B.d.A: $x_1, v, s \in C_1 \wedge t, w \in C_2$
+        \item $W = W_1,v,w,W_2,\bar{w},\bar{v},W'_1$
+    \end{itemize}
+    \vspace{.7em}
+    Start in $C_1$ (Teil $W_1$), via $vw$ zu $C_2$ (dort vollständig ablaufen, Teil $W_2$), via $\bar{w}\bar{v}$ zurück zu $C_1$, dort restliche Knoten ablaufen (Teil $W'_1$). o.B.d.A $s\in C_1 \wedge t \in C_2$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\insertsubsection~(Beispiel)}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.6\linewidth]{./img/robust-shortcutting.pdf}
+        \caption{Dekomposition eines Eulerian Walks $W$~\cite{recourse2016}}
+    \end{figure}
+    \center
+    $W = W_1,v,w,W_2,\bar{w},\bar{v},W'_1$\\
+    \vspace{.5em}
+    $W = W(x_1, v), v, W(w, t), W(t, w), \bar{w}, W(v, s), W(s, x_1)$\\
+    \vspace{.5em}
+    $W' = W(x_1, v), W(v, s), \bar{s}, W(t, w), W(w, t), \bar{t}, W(s, x_1)$
+\end{frame}
+
 \begin{frame}
     \frametitle{\insertsubsection}
-    
+    \underline{Input:}\\
+    \vspace{.7em}
+    Baum $R$ (auf Graf $G=(V,E)$), Eurlerian Walk $W = x_1, ..., x_r$ auf $2\cdot R$, Funktion $I: \{x_1,...,x_r\} \rightarrow \{0, 1\}$ (Selektionsfunktion um Nodes nur einmal zu besuchen), ein Baum $R' = (R \cup \{f\}) \setminus \{g\}$ wobei $f = st \notin R \wedge g = vw \in R$
+    \vspace{.8em}
+    \begin{itemize}
+        \itemsep\setlength{.8em}
+        \item Zerlege $W$ in Teil-Walks:\\
+        $W = W(x_1, v), v, W(w, t), W(t, w), \bar{w}, W(v, s), W(s, x_1)$\\
+        (Falls nicht möglich, drehe Walk um)
+        \item Rückgabe: $W' = W(x_1, v), W(v, s), \bar{s}, W(t, w), W(w, t), \bar{t}, W(s, x_1)$
+        \item „Patch“ Selektionsfunktion $I$: $I(\bar{t})=I(\bar{s}) = 0$. Falls $I(v)=1$ setze $I(x)=1$ ($x$ ist erster Knoten in $W(v,s)$). Gleiches für $I(w)$ bzw. $W(w,t)$.
+    \end{itemize}
 \end{frame}
 
 \subsection{Competitive Analysis}
 \begin{frame}
-    \frametitle{\insertsubsection}
-    
+    \frametitle{\insertsubsection~(Skizze)}
+    \begin{block}{Zusammenreihung der Algorithmen}
+        \vspace{.6em}
+        \begin{itemize}
+            \itemsep\setlength{.8em}
+            \item Erzeuge Spanning Tree $R$ zu Graf $G$ mit Algorithmus \emph{Sequence Freeze}
+            \item Erzeuge Eulerian Walk $W$ auf Multigraf $2\cdot R$
+            \item Erzeuge Tour $Q$ durch $G$ mit Algorithmus \emph{Robus Tour Shortcut}
+            \item Modifiziere (M)ST $\rightarrow R'$
+            \item \emph{Update} Eulerian Walk $W \rightarrow W'$ mit Algorithmus \emph{Robust Walk Update}
+            \item Nutze erneut \emph{Robust Tour Shortcut}: $W' \xrightarrow{neue TSP Tour} Q'$
+        \end{itemize}
+        \vspace{.1em}
+    \end{block}
+    \vspace{.1em}
+    \underline{Beobachtung:} Die Eulerian Walks sind sehr ähnlich, bis auf wenige Kanten $\rightarrow$ die TSP Touren $Q$ und $Q'$ sind sehr ähnlich.
+\end{frame}
+
+\begin{frame}
+    \frametitle{\insertsubsection~(Skizze)}
+    \underline{Zeige:}\qquad $|Q' \setminus Q| \leq 4$\\
+    \vspace{1em}
+    \begin{block}{Fallunterscheidungen}
+        \vspace{.7em}
+        Argumentation über die Dekomposition des Walks $W$ und das Update der Selektionsfunktion $I$.
+        Betrachte 4 Fälle in Walk $W'$:
+        \begin{itemize}
+            \itemsep\setlength{.5em}
+            \item $W(x_1, v) \rightarrow W(v, s)$
+            \item $W(v, s) \rightarrow W(t, w)$
+            \item $W(t, w) \rightarrow W(w, t)$
+            \item $W(w, t) \rightarrow W(s, x_1)$
+        \end{itemize}
+        \vspace{.1em}
+    \end{block}
 \end{frame}
