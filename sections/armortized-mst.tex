@@ -21,17 +21,16 @@
 
 \begin{frame}
     \frametitle{\insertsection}
-    \begin{theorem}[Untere Schranke]
+    \begin{theorem}[Lower Bound]
         \label{thm1}
         \vspace{.5em}
         Jeder $(1+\epsilon)$-competitive Algorithmus für das online MST Problem benötigt ein armortisiertes recourse Budget von $\Omega(\frac{1}{\epsilon})$
         \vspace{1em}
     \end{theorem}
-    \vspace{1em}
     Beweis siehe \cite{recourse2016}
     \vspace{1em}
 
-    \begin{theorem}[Obere Schranke]
+    \begin{theorem}[Upper Bound]
         \label{thm2}
         \vspace{.5em}
         Es existiert ein $(1+\epsilon)$-competitiver Algorithmus für das online MST Problem mit einem armortisierten recourse Budget von $O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
@@ -40,25 +39,55 @@
 \end{frame}
 
 \subsection{Freezing Rules}
+
+
 \begin{frame}
     \frametitle{\insertsubsection}
-    \underline{Finde Balance zwischen Anzahl Swaps $(\leq k)$ und Nutzen}\\
-    \vspace{1em}
+    \underline{Iteration $t$:}
+    \vspace{.8em}
+    \begin{itemize}
+        \itemsep\setlength{1em}
+        \item $OPT_t^{max}$: bestes (von unserem Algorithmus) erreichbares Ergebnis
+        \item $\ell(t)$: Iteration mit den meisten Swaps (vor dieser Iteration)
+        \item $\ell(t) \leq (t-1)$. $OPT_{\ell(t)}^{max} \leq \epsilon \cdot OPT_t^{max}$
+        \item Greedy Kante $g_s^0$: In Iteration $s$ greedy hinzugefügt
+        \item Swap: $g_s^1$ sei Kante, die $g_s^0$ ersetzt
+        \item Wurde in später ggf. geswapped, momentane Ersetzung: $g_s^{i(s)}$
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\insertsubsection}
     \begin{block}{Rule 1}
-        Verhindert das Swappen von Kanten, die zu einem Subgrafen gehören, der an den Gesamtkosten des MST keinen großen Einfluss hat. -- „Kein Swap wenn indirekter Nutzen zu gering. Andere Teilgrafen sind viel einflussreicher”.
+        \vspace{.6em}
+        Freeze Sequenz $(g_s^0, ..., g_s^{i(s)})$ gwd. $s \leq \ell(t)$
+        \vspace{.6em}
     \end{block}
     \vspace{1em}
     \begin{block}{Rule 2}
-        Verhindert das Entfernen von Kanten mit geringen Kosten. -- „Kein Swap, wenn direkter Nutzen zu gering”.
+        \vspace{.6em}
+        Freeze Kante wenn der Kostengewinn kleiner als $\epsilon OPT_t^{max}/ (t-\ell(t))$ ist.
+        \vspace{.6em}
     \end{block}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Rule 1 und 2 Formal}
-    FIXME: hier mit allen nötigen (so schmal wie möglich die beiden Rules formal definieren)
+    \frametitle{\insertsubsection~In Worten}
+    \underline{Finde Balance zwischen Anzahl Swaps $(\leq k)$ und Nutzen}\\
+    \vspace{1em}
+    \begin{block}{Rule 1}
+        Verhindert das Swappen von Kanten, die zu einem Subgrafen gehören, der an den Gesamtkosten des MST keinen großen Einfluss hat.\\
+        $\implies$Wurde vor / während der größten Iteration $\ell(t)$ geswapped. „Den besten bisherigen Subgrafen (und alles was schon davor gefroren war) fassen wir nicht mehr an.“
+    \end{block}
+    \vspace{1em}
+    \begin{block}{Rule 2}
+        Verhindert das Entfernen von Kanten deren Kosten kleiner als das Mittel seit der größten Iteration sind.\\
+        $\implies$„Kein Swap, wenn direkter Nutzen zu gering”.
+    \end{block}
 \end{frame}
 
-\subsection{Algorithm Sequence Freeze}
+
+\subsection{Algorithmus Sequence Freeze}
 \begin{frame}
     \frametitle{\insertsubsection}
     \underline{Wie simple Greedy Algorithmus mit Einschränkungen}\\
@@ -75,43 +104,54 @@
     \begin{enumerate}
         \itemsep\setlength{1em}
         \item $c(h) > (1+\epsilon) \cdot c(f)$
-        \item FIXME: hier formal (\emph{Rule 1} hält)
-        \item FIXME: hier formal (\emph{Rule 2} hält)
+        \item $h = g_s^{i(s)}$ für ein $s \geq \ell(t) + 1$ (nicht gefroren durch \emph{Rule 1})
+        \item $c(h) > \epsilon\frac{OPT_t^{max}}{t-\ell(t)}$ (nicht gefroren durch \emph{Rule 2})
     \end{enumerate}
 \end{frame}
 
-\subsection{Beweisskizze zu Theorem (2)}
+\subsection{Competitive Analysis (Skizze)}
 \begin{frame}
     \frametitle{\insertsubsection}
-    Competitive Analysis des Algoithmus\\
-    \vspace{1em}
+    Competitiveness des Algoithmus im Vergleich zu OPT\\
+    \vspace{.5em}
     \begin{block}{$(1+\epsilon)$-competitive}
-    \vspace{1em}
+        \vspace{.5em}
         \begin{itemize}
-            \itemsep\setlength{1em}
+            \itemsep\setlength{.5em}
             \item \emph{Cond. 1} \& \emph{Cond. 3} -- Kosten steigen maximal um $(1+3\epsilon)$ pro Iteration $\rightarrow (1+O(\epsilon))$-competitive
             \item \emph{Cond. 2} -- Durch Weglassen „kostengünstiger” Swaps wird die Gesamtlösung im Vergleich zu $OPT_t$ maximal $O(\epsilon OPT_t)$ schlechter
         \end{itemize}
-    \vspace{1em}
+        \vspace{.1em}
     \end{block}
+    \begin{itemize}
+        \itemsep\setlength{.5em}
+        \item Partitioniere Graf $T = T_{new} \cup T_{old}$ -- vor / nach längster Iteration
+        \item $T_{old} := \{g_1^{i(1)}, ..., g_{\ell(t)}^{i(\ell(t))}\}$
+        \item $T_{new} := \{g_{\ell(t)+1}^{i(\ell(t)+1)}, ..., g_t^{i(t)}\}$
+    \end{itemize}
+    Beweise Bounds für Partitionen
 \end{frame}
 
-\subsection{Beweisskizze zu Theorem (2)}
 \begin{frame}
     \frametitle{\insertsubsection}
     Armotisierter Upper Bound für Budget
-    \vspace{1em}
-    \begin{block}{Upper Bound auf Swap Sequenz Länge}
-        \vspace{1em}
-        \emph{Cond. 1} -- Nur Swap wenn Kostengewinn $> (1+\epsilon)$:\\Maximale Swapanzahl $\implies \log_{1+\epsilon}c(g_s^0) - \log_{1+\epsilon}c(g_s^{i(s)-1}) + 1$
-        \vspace{1em}
-    \end{block}
-    \vspace{1em}
-    \begin{block}{Bound auf Swap Kosten}
-        \vspace{1em}
-        \emph{Cond. 3} -- Nur Swap wenn entfernte Kante Threshold übersteigt \\
-        \emph{FIXME FORMAL}
-        \vspace{1em}
+    \vspace{.5em}
+    \begin{itemize}
+        \itemsep\setlength{.5em}
+        \item $k_q := |T_q \setminus T_{q-1}|$: \underline{benutztes} Budget in Iteration $q$
+        \item $D_\epsilon \in O(\frac{1}{\epsilon}\log\frac{1}{\epsilon})$
+    \end{itemize}
+    \vspace{.5em}
+    \begin{block}{Zeige $\sum_{q=1}^t k_q \leq D_\epsilon \cdot t$}
+        \vspace{.5em}
+        \begin{enumerate}
+            \itemsep\setlength{.8em}
+            \item Upper Bound auf Swap Sequenz Länge\\
+            \emph{Cond. 1} -- Nur Swap wenn Kostengewinn $> (1+\epsilon)$:\\Maximale Swapanzahl $\implies \log_{1+\epsilon}c(g_s^0) - \log_{1+\epsilon}c(g_s^{i(s)-1}) + 1$
+            \item Lower Bound auf Swap Kosten\\
+            \emph{Cond. 3} -- Nur Swap wenn Kosten d. zu entfernenden Kante Threshold übersteigt
+        \end{enumerate}
+        \vspace{.1em}
     \end{block}
 \end{frame}
 
